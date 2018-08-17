@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息列表</title>
+</head>
+<body>
+<h1>学生信息列表</h1>
+<ul>
+    {# [python02,python03,python04] #}
+    <li>姓名&nbsp;|&nbsp;性别&nbsp;|&nbsp;年龄&nbsp;|&nbsp;个人简介&nbsp;|&nbsp;班级</li>
+    <br>
+    {% for stu in students %}
+        <li>
+            {{ stu.sname }}&nbsp;|&nbsp;
+            {% if stu.sgender %}
+                男
+            {% else %}
+                女
+            {% endif %}
+            &nbsp;|&nbsp;
+            {{ stu.sage }}&nbsp;|&nbsp;{{ stu.scontent }}&nbsp;|&nbsp;{{ stu.sgrade }}
+        </li><br>
+    {% endfor %}
+
+</ul>
+</body>
+</html>
