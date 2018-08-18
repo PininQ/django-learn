@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #header{
+            width: auto;
+            height: 200px;
+            background-color: #426c9e;
+        }
+        #footer{
+            width: auto;
+            height: 200px;
+            background-color: greenyellow;
+        }
+    </style>
+
+</head>
+<body>
+<div id="header">header</div>
+
+<div id="main">
+    {% block main %}
+    {#    填充内容    #}
+    {%endblock main %}
+
+    {% block detail %}
+    {#    填充内容    #}
+    {%endblock detail %}
+</div>
+
+<div id="footer">footer</div>
+
+</body>
+</html>

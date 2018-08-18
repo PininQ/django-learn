@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{# url 的反向解析 #}
+<h1><a href="{% url 'app:good' 1 %}">good 链接</a></h1>
+
+<h1>Bin Qin is good man</h1>
+{# 1. 获取属性 #}
+{#通过属性名获取学生名字#}
+<h1>{{ stu.sname }}</h1>
+{#通过自定义 get 方法获取#}
+<h1>{{ stu.getName }}</h1>
+
+{#  2. 注释的部分（多行注释）  #}
+{% comment %}
+    {% for stu in students %}
+        <li>{{ forloop.counter }}——{{ stu.sname }}——{{ stu.sgrade }}</li>
+    {% empty %}
+        <li>目前没有学生</li>
+    {% endfor %}
+{% endcomment %}
+
+{# 3. {% ifequal 'qinbin' 'qinbin' %} 的使用 #}
+{% ifequal 'qinbin' 'qinbin' %}
+    <h1>如果值1 与 值2 相等就输出，不相等就不输出！</h1>
+{% endifequal %}
+
+{# 4. 过滤器使用示例#}
+<h1>{{ stu.sname|upper }}</h1>
+<h1>{{ stu.sname }}</h1>
+
+{# 5. join 的使用 #}
+<h1>{{ list|join:'-' }}</h1>
+
+{# 6. 默认值#}
+<h1>{{ test|default:"None" }}</h1>
+
+{# 7. 加减乘除#}
+<h1>num = {{ num }}</h1>
+<h1>num = {{ num|add:10 }}</h1>
+<h1>num = {{ num|add:-5 }}</h1>
+{# num/1*5 #}
+{# num * 5 #}
+<h1>num = {% widthratio num 1 5 %}</h1>
+{# num / 5 #}
+<h1>num = {% widthratio num 5 1 %}</h1>
+
+
+</body>
+</html>
