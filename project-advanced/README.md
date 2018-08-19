@@ -40,7 +40,7 @@ MIDDLEWARE = [
 ### 执行位置
 
 中间件各方法执行位置
-![中间件各方法执行位置](https://note.youdao.com/favicon.ico)
+![中间件各方法执行位置](https://raw.githubusercontent.com/qinbin52qiul/MarkdownPhotos/master/django-learn/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%90%84%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C%E4%BD%8D%E7%BD%AE.png)
 
 ### 自定义中间件
 
@@ -73,16 +73,20 @@ MIDDLEWARE = [
 
  Ajax 请求，在谷歌浏览器里的控制台没有返回数据，还一直显示着历史的 console.log("I am Bin Qin") ，暂时不知道怎么回事，先记录一下，
 
- ![image](https://note.youdao.com/favicon.ico)
+ ![谷歌浏览器Ajax返回数据结果](https://raw.githubusercontent.com/qinbin52qiul/MarkdownPhotos/master/django-learn/%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8Ajax%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%9C.png)
  
  在火狐浏览器返回了数据。
  
- ![image](https://note.youdao.com/favicon.ico)
+ ![火狐浏览器Ajax返回数据结果](https://raw.githubusercontent.com/qinbin52qiul/MarkdownPhotos/master/django-learn/%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8Ajax%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%9C.png)
 
 
 谷歌浏览器的 Ajax 请求可以返回数据了，一直点击 `Clear console` 就可以突然显示数据了😁。如下图：
 
- ![image](https://note.youdao.com/favicon.ico)
+ ![clear console](https://raw.githubusercontent.com/qinbin52qiul/MarkdownPhotos/master/django-learn/clear%20console.png)
+ 
+ 谷歌浏览器的 Ajax 请求可以返回数据
+
+ ![谷歌浏览器的Ajax请求可以返回数据](https://raw.githubusercontent.com/qinbin52qiul/MarkdownPhotos/master/django-learn/%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84Ajax%E8%AF%B7%E6%B1%82%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E6%95%B0%E6%8D%AE.png)
  
  ## Celery - 分布式任务队列
  
@@ -143,6 +147,8 @@ CELERY_IMPORTS = ('myApp.task')  # 任务配置
 ### 执行迁移生成 celery 所需的数据库表
  
  python manage.py migrate
+ 
+ ![celery](https://raw.githubusercontent.com/qinbin52qiul/MarkdownPhotos/master/django-learn/celery.png)
  
 ### 在工程目录下的 project 目录下创建 celery.py 文件
 
