@@ -1,0 +1,27 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="{% static 'tiny_mce/tiny_mce.js' %}"></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+            'mode': 'textareas',
+            'theme' : 'advanced',
+            'width': 800,
+            'height': 600,
+        })
+    </script>
+</head>
+<body>
+
+<form action="/saveedit/" method="post">
+    <textarea name="str">
+        look, look
+    </textarea>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

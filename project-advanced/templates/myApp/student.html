@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生分页显示</title>
+</head>
+<body>
+<h1>学生分页显示结果</h1>
+<ul>
+    {% for stu in  students %}
+        <li>
+            {{ stu.sname }}--{{ stu.sgrade }}
+        </li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for index in students.paginator.page_range %}
+        {% if index == students.number %}
+            {{ index }}
+        {% else %}
+            <li>
+                <a href="/student/{{ index }}/">{{ index }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+</body>
+</html>
