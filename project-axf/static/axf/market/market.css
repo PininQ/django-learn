@@ -162,9 +162,9 @@ section menu ul li a img {
 }
 
 .detailTag span {
-    border: 0.05rem solid red;
-    border-radius: 0.15rem;
-    padding: 0 0.1rem;
+    border: 0.1rem solid red;
+    border-radius: 0.2rem;
+    padding: 0 0.2rem;
     color: white;
     background: red;
     margin-right: 0.3rem;

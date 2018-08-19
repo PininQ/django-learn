@@ -148,15 +148,15 @@ class Goods(models.Model):
     productimg = models.CharField(max_length=200)  # 商品的图片
     productname = models.CharField(max_length=100)  # 商品的名称
     productlongname = models.CharField(max_length=200)  # 商品的规格
-    isxf = models.IntegerField(default=1)
-    pmdesc = models.CharField(max_length=100)
+    isxf = models.IntegerField(default=1)  # 精选
+    pmdesc = models.CharField(max_length=100)  # 买一赠一
     specifics = models.CharField(max_length=100)  # 规格
     price = models.FloatField(default=0)  # 商品的折后价格
     marketprice = models.FloatField(default=1)  # 商品的原价
     categoryid = models.CharField(max_length=16)  # 分类id
     childcid = models.CharField(max_length=16)  # 子分类id
     childcidname = models.CharField(max_length=100)  # 子分类名称
-    dealerid = models.CharField(max_length=16)
+    dealerid = models.CharField(max_length=16)  # 详情页id
     storenums = models.IntegerField(default=1)  # 排序
     productnum = models.IntegerField(default=1)  # 销量排序
 
