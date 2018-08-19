@@ -1,10 +1,17 @@
 from django.shortcuts import render
-from .models import Wheel
+from .models import Wheel, Nav,Mustbuy
 
 
 def home(request):
     wheelsList = Wheel.objects.all()
-    return render(request, 'axf/home.html', {"title": "主页", "wheelsList": wheelsList})
+    navList = Nav.objects.all()
+    mustbuyList = Mustbuy.objects.all()
+    return render(request, 'axf/home.html', {
+        "title": "主页",
+        "wheelsList": wheelsList,
+        "navList": navList,
+        "mustbuyList": mustbuyList,
+    })
 
 
 def market(request):

@@ -14,12 +14,56 @@
             {% for item in wheelsList %}
                 <div class="swiper-slide">
                     <a href="#">
-                        <img src="{{item.img}}"/>
+                        <img src="{{ item.img }}"/>
                     </a>
                 </div>
             {% endfor %}
         </div>
         <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"></div>
     </section>
+
+    {#  导航  #}
+    <section class="topMenu">
+        <nav>
+            <ul>
+                {% for item in navList %}
+                    <li>
+                        <a href="#">
+                            <img src="{{ item.img }}" alt="">
+                            <span>{{ item.name }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        {#  轮播  #}
+        <menu class="swiper-container" id="swiperMenu">
+            <ul class="swiper-wrapper">
+                {% for item in mustbuyList %}
+                    <li class="swiper-slide">
+                        <a href="#"><img src="{{ item.img }}" alt=""></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </menu>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}
