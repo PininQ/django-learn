@@ -1,25 +1,110 @@
-{% extends 'axf/base.html' %}
+{% extends 'base_main.html' %}
 
-{% load static from staticfiles %}
-{% block linkscript %}
-    <link rel="stylesheet" type="text/css" href="{% static 'market/css/market.css' %}"/>
-    <script type="text/javascript" charset="utf-8" src="{% static 'market/js/market.js' %}"></script>
+{#加载静态资源，以下两种方式#}
+{% load static %}
+{#{% load static from staticfiles %}#}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'axf/market/market.css' %}">
+{% endblock %}
+
+{% block EXTJS %}
+    <script type="text/javascript" src="{% static 'axf/market/js/market.js' %}"></script>
+    <script type="text/javascript" src="{% static 'axf/common/functions.js' %}"></script>
 {% endblock %}
 
 
-{% block base %}
-    <div id="market">
-        <aside>
+{% block content %}
+<div id="market">
+    <aside>
+        <ul>
+            <!--闪购分类展示-->
+            {% for types in foodtypes %}
+                <li>
+                    <!--链接地址，点击获取分类下的商品信息-->
+                    <a href="{% url 'axf:market_params' types.typeid '0' '0' %}">
+                        {{ types.typename }}
+                    </a>
+                    {% ifequal types.typeid typeid %}
+                        <span class="yellowSlide"></span>
+                    {% endifequal %}
+                </li>
+            {% endfor %}
+            <!--处理数据结束-->
+        </ul>
+    </aside>
+    <section>
+        <nav>
             <ul>
-                {% for foodtype in foodtypes %}
-                    <li>
-                        <span class="yelloewSlide"></span>
-                        <a href="#">{{ foodtype.typename }}</a>
-                    </li>
-                {% endfor %}
+                <li id="all_types">
+                        <span>
+                        全部类型<span id="all_type_logo" class="glyphicon glyphicon-chevron-down"></span>
+                        </span>
+                </li>
+                <li id="sort_rule">
+                        <span>
+                        综合排序<span class="glyphicon glyphicon-chevron-down"></span>
+                        </span>
+                </li>
             </ul>
-        </aside>
+        </nav>
+    </section>
 
+    <section>
+        <nav>
+            <ul>
+                <li id="all_types">
+                    <span>全部类型<span id="all_type_logo" class="glyphicon glyphicon-chevron-down"></span></span>
+                </li>
+                <li id="sort_rule">
+                    <span>综合排序<span id="sort_rule_logo" class="glyphicon glyphicon-chevron-down"></span></span>
+                </li>
+            </ul>
+        </nav>
 
-    </div>
+        <menu>
+            <ul>
+                {% csrf_token %}
+                {% for gds in goods %}
+                <!--商品信息展示-->
+                <li>
+                    <a href="#">
+                        <img src="{{ gds.productimg }}" alt="">
+                        <div class="shoppingInfo">
+                            <h6></h6>
+                            <p class="detailTag">
+                                <span>精选</span>
+                                <span></span>
+                            </p>
+                            <p class="unit">
+                                {{ gds.productlongname }}
+                            </p>
+                            <p class="price">
+                                <span>¥{{ gds.price }}</span>
+                                <s>¥{{ gds.marketprice }}</s>
+                            </p>
+                        </div>
+                    </a>
+                    <section>
+                        <button goodsid="" onclick="subCart({{ gds.id }})">-</button>
+                        {% if user_cart %}
+                        {% for cart_goods in user_cart %}
+                        {% ifequal cart_goods.goods.id gds.id %}
+                        <span id="num_{{ gds.id }}">{{ cart_goods.c_num }}</span>
+                        {% else %}
+                        <span id="num_{{ gds.id }}">0</span>
+                        {% endifequal %}
+                        {% endfor %}
+                        {% else %}
+                        <span id="num_{{ gds.id }}">0</span>
+                        {% endif %}
+                        <button goodsid="" onclick="addCart({{ gds.id }})">+</button>
+                    </section>
+                </li>
+                {% endfor %}
+                <!--处理数据结束-->
+            </ul>
+        </menu>
+</div>
 {% endblock %}

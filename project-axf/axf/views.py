@@ -1,34 +1,58 @@
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from .models import Wheel, Nav, Mustbuy, Shop, MainShow, FoodType, Goods
+from django.core.urlresolvers import reverse
+
+from axf.models import MainWheel, MainNav, MainMustBuy, \
+    MainShop, MainShow, FoodType, Goods
 
 
 def home(request):
-    wheelsList = Wheel.objects.all()
-    navList = Nav.objects.all()
-    mustbuyList = Mustbuy.objects.all()
-    shopList = Shop.objects.all()
-    shop1 = shopList[0]
-    shop2 = shopList[1:3]
-    shop3 = shopList[3:7]
-    shop4 = shopList[7:11]
-    mainList = MainShow.objects.all()
-    context = {
-        "title": '主页',
-        "wheelsList": wheelsList,
-        "navList": navList,
-        "mustbuyList": mustbuyList,
-        "shop1": shop1,
-        "shop2": shop2,
-        "shop3": shop3,
-        "shop4": shop4,
-        "mainList": mainList,
-    }
-    return render(request, 'axf/home.html', context=context)
+    '''
+    首页视图函数
+    '''
+    if request.method == 'GET':
+        mainwheels = MainWheel.objects.all()
+        mainnavs = MainNav.objects.all()
+        mainbuys = MainMustBuy.objects.all()
+        mainshops = MainShop.objects.all()
+        mainshows = MainShow.objects.all()
+
+        data = {
+            'title': '首页',
+            'mainwheels': mainwheels,
+            'mainnavs': mainnavs,
+            'mainbuys': mainbuys,
+            'mainshops': mainshops,
+            'mainshows': mainshows,
+        }
+        return render(request, 'axf/home.html', data)
 
 
 def market(request):
+    if request.method == 'GET':
+        return HttpResponseRedirect(reverse('axf:market_params', args=('104749', '0', '0')))
+
+
+def user_market(request, typeid, cid, sid):
+    """
+    :param request:
+    :param typeid: 分类id
+    :param cid: 子类id
+    :param sid: 排序id
+    """
     foodtypes = FoodType.objects.all()
-    return render(request, 'axf/market.html', {"title": "闪送超市", "foodtypes": foodtypes})
+    # 获取某分类下的商品
+    if cid == '0':
+        goods = Goods.objects.filter(categoryid=typeid)
+    else:
+        goods = Goods.objects.filter(categoryid=typeid, childcid=cid)
+    data = {
+        'foodtypes': foodtypes,
+        'goods': goods,
+        'typeid': typeid,
+        'cid': cid,
+    }
+    return render(request, 'axf/market.html', data)
 
 
 def cart(request):

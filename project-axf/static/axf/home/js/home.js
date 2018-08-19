@@ -1,12 +1,12 @@
 $(document).ready(function(){
     setTimeout(function(){
-        swiper1();
-        swiper2();
+        initTopSwiper();
+        initMenuSwiper();
     }, 100)
 
 })
 
-function swiper1() {
+function initTopSwiper() {
     var mySwiper1 = new Swiper('#topSwiper', {
         direction: 'horizontal',
         loop: true,
@@ -17,7 +17,7 @@ function swiper1() {
     });
 };
 
-function swiper2() {
+function initMenuSwiper() {
     var mySwiper2 = new Swiper('#swiperMenu', {
         slidesPerView: 3,
         paginationClickable: true,
