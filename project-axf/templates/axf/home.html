@@ -125,10 +125,10 @@
             <!--商品展示-->
             {% for shows in mainshows %}
                 <section>
-                    <h3><span></span><a href="#">更多&gt;</a></h3>
+                    <h3>{{ shows.name }}<span></span><a href="#">更多&gt;</a></h3>
                     <div>
                         <a href="#">
-                            <img src="{{ shows.img }}" alt="">
+                            <img src="{{ shows.img }}" alt="{{ shows.name }}">
                         </a>
                     </div>
                     <ul>
@@ -147,7 +147,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <img src="{{ shows.img2 }}" alt="">
+                                <img src="{{ shows.img2 }}" alt="{{ shows.longname2 }}">
                                 <p class="description">
                                     {{ shows.longname2 }}
                                 </p>
@@ -160,7 +160,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <img src="{{ shows.img3 }}" alt="">
+                                <img src="{{ shows.img3 }}" alt="{{ shows.longname3 }}">
                                 <p class="description">
                                     {{ shows.longname3 }}
                                 </p>

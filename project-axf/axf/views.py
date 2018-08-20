@@ -101,4 +101,8 @@ def mine(request):
     """
     我的
     """
-    return render(request, 'axf/mine.html', {"title": "我的"})
+    if request.method == 'GET':
+        data = {
+            "title": "我的"
+        }
+    return render(request, 'axf/mine.html', data)
