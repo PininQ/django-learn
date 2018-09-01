@@ -13,7 +13,6 @@
 
         <form method="post" action="" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ msg }}
             <div class="form-group">
                 <label for="exampleInputEmail1">用户</label>
                 <input id="username" type="text" name="username" class="form-control" placeholder="用户名">
@@ -38,6 +37,7 @@
             </div>
 
             <input type="submit" class="btn btn-success btn-block" value="注册">
+            <div class="msg">{{ msg }}</div>
         </form>
 
 

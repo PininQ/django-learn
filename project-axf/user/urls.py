@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'^register/$', views.register, name='register'),
     # 注销
     url(r'^logout/$', views.logout, name='logout'),
+    # 检查用户名是否已经存在
+    url(r'^checkuser/', views.check_user, name='check_user'),
 ]

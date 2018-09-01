@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from axf.models import MainWheel, MainNav, MainMustBuy, \
     MainShop, MainShow, FoodType, Goods
 
+from user.models import UserTicketModel
 
 def home(request):
     """
@@ -30,6 +31,17 @@ def home(request):
         # 携带数据渲染页面
         return render(request, 'axf/home.html', data)
 
+def mine(request):
+    """
+    我的
+    """
+    if request.method == 'GET':
+        user = request.user
+        data = {
+            "title": "我的"
+        }
+    return render(request, 'axf/mine.html', data)
+
 
 def market(request):
     """
@@ -48,46 +60,53 @@ def user_market(request, typeid, cid, sid):
     :param cid: 子类id
     :param sid: 排序id
     """
-    # 查询所有食品类型
-    foodtypes = FoodType.objects.all()
-    # 根据分类查询到对应的所有商品
-    if cid == '0':
-        goods = Goods.objects.filter(categoryid=typeid)
-    # typeid 和 categoryid   并且是一对多的一个关系
-    else:
-        goods = Goods.objects.filter(categoryid=typeid, childcid=cid)
+    if request.method == 'GET':
+        ticket = request.COOKIES.get('ticket')
+        user_ticket = UserTicketModel.objects.filter(ticket=ticket).first()
+        if user_ticket:
+            user = user_ticket.user
+        else:
+            user = ''
+        # 查询所有食品类型
+        foodtypes = FoodType.objects.all()
+        # 根据分类查询到对应的所有商品
+        if cid == '0':
+            goods = Goods.objects.filter(categoryid=typeid)
+        # typeid 和 categoryid   并且是一对多的一个关系
+        else:
+            goods = Goods.objects.filter(categoryid=typeid, childcid=cid)
 
-    # 重新组装全部分类的参数
-    # 组装结果为[['全部分类','0'], ['酒类':13550], ['饮用水':15431]]
-    foodtypes_current = foodtypes.filter(typeid=typeid).first()
-    if foodtypes_current:
-        childtypes = foodtypes_current.childtypenames
-        childtypenames = childtypes.split('#')
-        child_list = []
-        for childtypename in childtypenames:
-            child_type_info = childtypename.split(':')
-            child_list.append(child_type_info)
+        # 重新组装全部分类的参数
+        # 组装结果为[['全部分类','0'], ['酒类':13550], ['饮用水':15431]]
+        foodtypes_current = foodtypes.filter(typeid=typeid).first()
+        if foodtypes_current:
+            childtypes = foodtypes_current.childtypenames
+            childtypenames = childtypes.split('#')
+            child_list = []
+            for childtypename in childtypenames:
+                child_type_info = childtypename.split(':')
+                child_list.append(child_type_info)
 
-    # 将商品按指定顺序排序
-    if sid == '0':
-        pass
-    if sid == '1':
-        goods = goods.order_by('productnum')
-    if sid == '2':
-        goods = goods.order_by('-price')
-    if sid == '3':
-        goods = goods.order_by('price')
+        # 将商品按指定顺序排序
+        if sid == '0':
+            pass
+        if sid == '1':
+            goods = goods.order_by('productnum')
+        if sid == '2':
+            goods = goods.order_by('-price')
+        if sid == '3':
+            goods = goods.order_by('price')
 
-    # 组织数据
-    data = {
-        'foodtypes': foodtypes,
-        'goods': goods,
-        'typeid': typeid,
-        'child_list': child_list,
-        'cid': cid,
-    }
-    # 传递数据给页面并渲染
-    return render(request, 'axf/market.html', data)
+        # 组织数据
+        data = {
+            'foodtypes': foodtypes,
+            'goods': goods,
+            'typeid': typeid,
+            'child_list': child_list,
+            'cid': cid,
+        }
+        # 传递数据给页面并渲染
+        return render(request, 'axf/market.html', data)
 
 
 def cart(request):
@@ -97,12 +116,4 @@ def cart(request):
     return render(request, 'axf/cart.html', {"title": "购物车"})
 
 
-def mine(request):
-    """
-    我的
-    """
-    if request.method == 'GET':
-        data = {
-            "title": "我的"
-        }
-    return render(request, 'axf/mine.html', data)
+

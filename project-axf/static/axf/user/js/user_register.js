@@ -16,7 +16,7 @@ $(function () {
     $("#username").change(function () {
 
         var username = $("#username").val();
-        $.getJSON("/axf/checkuser/", {"username": username}, function (data) {
+        $.getJSON("/user/checkuser/", {"username": username}, function (data) {
 
             console.log(data);
 

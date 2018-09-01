@@ -1,8 +1,13 @@
-div{
+div {
     font-size: 0.4rem;
 }
 
-div input{
+div input {
     font-size: 0.4rem !important;
     height: 1rem !important;
+}
+
+.msg {
+    color: red;
+    font-weight: bold;
 }
