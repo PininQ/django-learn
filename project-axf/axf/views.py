@@ -3,9 +3,10 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse
 
 from axf.models import MainWheel, MainNav, MainMustBuy, \
-    MainShop, MainShow, FoodType, Goods
+    MainShop, MainShow, FoodType, Goods, CartModel
 
 from user.models import UserTicketModel
+
 
 def home(request):
     """
@@ -30,6 +31,7 @@ def home(request):
         }
         # 携带数据渲染页面
         return render(request, 'axf/home.html', data)
+
 
 def mine(request):
     """
@@ -113,7 +115,13 @@ def cart(request):
     """
     购物车
     """
-    return render(request, 'axf/cart.html', {"title": "购物车"})
+    if request.method == 'GET':
+        # 获取用户
+        user = request.user
+        # 查询购物车信息
+        user_carts = CartModel.objects.filter(user=user)
 
-
-
+        data = {
+            'user_carts': user_carts
+        }
+        return render(request, 'axf/cart.html', {"title": "购物车"})
