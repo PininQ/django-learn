@@ -3,11 +3,9 @@ footer .market span {
     background-size: 0.513889rem;
 }
 
-
-footer .market dl dd{
+footer .market dl dd {
     color: orange;
 }
-
 
 #market {
     padding: 1.5rem 0;
@@ -18,8 +16,7 @@ footer .market dl dd{
     position: fixed;
 }
 
-
-/*********左面的的导航*********************/
+/*********左侧分类导航*********************/
 aside {
     width: 2.5rem;
     float: left;
@@ -72,7 +69,7 @@ div > section {
 
 /**********以下******全部分类****综合安排***************/
 nav {
-    top: 1.32rem;
+    top: 1.22rem;
     right: 0;
     position: fixed;
     z-index: +1;
@@ -84,7 +81,7 @@ nav ul {
     display: flex;
     background: white;
     height: 1.38rem;
-    padding-top: 0.475rem;
+    padding-top: 0.675rem;
 }
 
 nav ul li {
@@ -105,13 +102,10 @@ nav ul li > span {
     width: 100%;
     height: 1rem;
     display: block;
+    /*margin-left: 0.3rem;*/
 }
 
-
-/*
-    商品列表
-*/
-
+/*商品列表*/
 section menu {
     height: 100%;
     position: relative;
@@ -162,7 +156,7 @@ section menu ul li a img {
 }
 
 .detailTag span {
-    border: 0.1rem solid red;
+    border: 0.05rem solid red;
     border-radius: 0.2rem;
     padding: 0 0.2rem;
     color: white;
@@ -178,8 +172,6 @@ section menu ul li a img {
 /******单位**********/
 .unit {
     color: grey;
-    position: absolute;
-    bottom: 1rem;
 }
 
 .price {
@@ -202,7 +194,7 @@ section menu ul li a img {
 li > section {
     position: absolute;
     right: 0.4rem;
-    bottom: 0.4rem;
+    bottom: 0.1rem;
     height: 0.75rem;
     border-radius: 1rem;
 }
@@ -214,7 +206,7 @@ section > button {
     color: red;
     display: inline-block;
     text-align: center;
-    line-height: 0.55rem;
+    line-height: 0.5rem;
     font-weight: 900;
     width: 0.5rem;
     height: 0.5rem;
@@ -247,7 +239,7 @@ section menu > div {
 
 section menu > div > div {
     background: white;
-    padding-bottom: 0.3rem;
+    padding-bottom: 0.12rem;
 }
 
 section menu > div > div > a > span {

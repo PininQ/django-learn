@@ -3,7 +3,6 @@ footer .home span {
     background-size: 0.513889rem;
 }
 
-
 .home dl dd {
     color: orange;
 }
@@ -18,9 +17,7 @@ footer .home span {
     position: fixed;
 }
 
-/*
-            轮播样式
-*/
+/*轮播样式*/
 #topSwiper {
     height: 3.95rem;
     width: 10rem;
@@ -38,15 +35,7 @@ footer .home span {
     height: 100%;
 }
 
-/*
-    导航快
-*/
-
-
-.topMenu {
-    padding-bottom: 0.26rem;
-}
-
+/*导航快*/
 .topMenu nav {
     margin: 0.35rem 0 0.26rem;
     background: white;
@@ -66,37 +55,28 @@ footer .home span {
     width: 2.5rem;
 }
 
-/*
-    必购
-*/
-
+/*必购*/
 #swiperMenu {
     width: 100%;
 }
-
-
-/*#swiperMenu li{*/
-  /*width:3.333333rem*/
-/*}*/
 
 #swiperMenu li img {
     width: 100%;
 }
 
-/*
-    商店
-*/
-
-
+/*商店*/
 .CVS {
     background: white;
+}
+
+.CVS h2 {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .CVS h2 img {
     width: 100%;
 }
-
-
 
 .CVS fieldset {
     border: none;
@@ -112,8 +92,6 @@ footer .home span {
     width: 100%;
 }
 
-
-
 .CVS ul {
     display: flex;
 }
@@ -127,9 +105,6 @@ footer .home span {
 .CVS ul li img {
     width: 2.5rem;
 }
-
-
-
 
 .CVS ol {
     display: flex;
@@ -149,11 +124,7 @@ footer .home span {
     width: 100%;
 }
 
-
-/*
-    主要信息
-*/
-
+/*主要信息*/
 .mainInfo {
     background-color: white;
 }
@@ -191,7 +162,6 @@ footer .home span {
 .mainInfo > section > div > a > img {
     width: 100%;
 }
-
 
 .mainInfo > section > ul {
     display: flex;
@@ -235,16 +205,16 @@ footer .home span {
 .mainInfo > section > ul > li > button {
     border: 1px solid lightgrey;
     border-radius: 1111px;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.5rem;
+    height: 0.5rem;
     display: block;
     line-height: 0.0rem;
     text-align: center;
     color: orangered;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     position: absolute;
     right: 0;
-    top: 3.6rem;
+    top: 3.5rem;
     background: white;
 }
 

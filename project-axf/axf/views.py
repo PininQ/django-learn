@@ -101,6 +101,7 @@ def user_market(request, typeid, cid, sid):
 
         # 组织数据
         data = {
+            "title": "闪送超市",
             'foodtypes': foodtypes,
             'goods': goods,
             'typeid': typeid,

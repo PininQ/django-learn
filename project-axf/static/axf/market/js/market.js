@@ -1,19 +1,17 @@
 $(function () {
 
     $("#all_types").click(function () {
-
         $("#all_types_container").show();
         $("#all_type_logo").removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
         $("#sort_container").hide();
         $("#sort_rule_logo").addClass("glyphicon-chevron-down").removeClass("glyphicon-chevron-up");
-    })
+    });
 
 
     $("#all_types_container").click(function () {
         $(this).hide();
         $("#all_type_logo").addClass("glyphicon-chevron-down").removeClass("glyphicon-chevron-up");
-
-    })
+    });
 
 
     $("#sort_rule").click(function () {
@@ -21,15 +19,14 @@ $(function () {
         $("#sort_rule_logo").addClass("glyphicon-chevron-up").removeClass("glyphicon-chevron-down");
         $("#all_types_container").hide();
         $("#all_type_logo").removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
-    })
+    });
 
     $("#sort_container").click(function () {
         $(this).hide();
         $("#sort_rule_logo").addClass("glyphicon-chevron-down").removeClass("glyphicon-chevron-up");
-    })
+    });
 
-
-//    添加商品到购物车
+    // 添加商品到购物车
     $(".addShopping").click(function () {
         //    拿到商品id发送给服务器
         var addShop = $(this);
@@ -52,7 +49,8 @@ $(function () {
             }
         })
 
-    })
+    });
+
     // 添加商品到购物车
     $(".subShopping").click(function () {
         //    拿到商品id发送给服务器
@@ -78,6 +76,4 @@ $(function () {
             }
         })
     })
-
-
-})
+});

@@ -34,7 +34,7 @@
                 {% endfor %}
                 <!-- 处理结束 -->
             </div>
-            <!-- 如果需要分页器 -->
+            <!-- 如果需要分页器 小圆点 -->
             <div class="swiper-pagination"></div>
         </section>
 
@@ -45,27 +45,28 @@
                     <!-- 处理导航数据 -->
                     {% for nav in mainnavs %}
                         <li>
-                            <img src="{{ nav.img }}" alt="">
-                            <span>{{ nav.name }}</span>
+                            <a href="#">
+                                <img src="{{ nav.img }}" />
+                                <span>{{ nav.name }}</span>
+                            </a>
                         </li>
                     {% endfor %}
                     <!--处理结束-->
                 </ul>
             </nav>
         </div>
-        {#       必购     #}
+        {# 必购 #}
         <div id="swiperMenu" class="swiper-container">
             <ul class="swiper-wrapper">
                 <!-- 处理必购商品信息 -->
                 {% for buys in mainbuys %}
                     <li class="swiper-slide">
-                        <img src="{{ buys.img }}" alt="">
+                        <a href="#"><img src="{{ buys.img }}" /></a>
                     </li>
                 {% endfor %}
                 <!-- 处理结束 -->
             </ul>
         </div>
-        </section>
 
         {#  便利店  #}
         <div class="CVS">
@@ -73,7 +74,7 @@
             {% for shops in mainshops %}
                 {% ifequal forloop.counter 1 %}
                     <h2>
-                        <img src="{{ shops.img }}" alt="">
+                        <img src="{{ shops.img }}" />
                     </h2>
                 {% endifequal %}
             {% endfor %}
@@ -84,7 +85,7 @@
                     {% if forloop.counter > 1 and forloop.counter < 4 %}
                         <!--处理第二个到第四个数据-->
                         <a href="#">
-                            <img src="{{ shops.img }}" alt="">
+                            <img src="{{ shops.img }}" />
                         </a>
                     {% endif %}
                     <!--处理结束-->
@@ -97,7 +98,7 @@
                     {% if forloop.counter > 3 and forloop.counter < 8 %}
                         <li>
                             <a href="#">
-                                <img src="{{ shops.img }}" alt="">
+                                <img src="{{ shops.img }}" />
                                 <span>{{ shops.name }}</span>
                             </a>
                         </li>
@@ -112,7 +113,7 @@
                     {% if forloop.counter > 7 and forloop.counter < 12 %}
                         <li>
                             <a href="#">
-                                <img src="{{ shops.img }}" alt="">
+                                <img src="{{ shops.img }}" />
                             </a>
                         </li>
                     {% endif %}
@@ -125,7 +126,11 @@
             <!--商品展示-->
             {% for shows in mainshows %}
                 <section>
-                    <h3>{{ shows.name }}<span></span><a href="#">更多&gt;</a></h3>
+                    <h3>
+                        {{ shows.name }}
+                        <a href="#">更多&gt;</a>
+                        <span></span>
+                    </h3>
                     <div>
                         <a href="#">
                             <img src="{{ shows.img }}" alt="{{ shows.name }}">
@@ -134,7 +139,7 @@
                     <ul>
                         <li>
                             <a href="#">
-                                <img src="{{ shows.img1 }}" alt="">
+                                <img src="{{ shows.img1 }}" />
                                 <p class="description">
                                     {{ shows.longname1 }}
                                 </p>
