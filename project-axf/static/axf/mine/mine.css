@@ -80,35 +80,30 @@ footer .mine dl dd {
 }
 
 .fixed p:last-child {
-    background: #f0e000;
+    background: orange;
     width: 100%;
     position: absolute;
     text-align: center;
     bottom: 0;
     margin-bottom: 0;
     font-size: 0.4rem;
-    line-height: 0.5rem;
     height: 1rem;
 }
 
 .fixed p:last-child span:last-child {
-    margin: 0.2rem;
     color: white;
+    line-height: 1rem;
 }
 
 .fixed p:last-child span:first-child {
     color: red;
 }
 
-
-
-
 .mine {
     width: 100%;
     height: 100%;
     overflow: auto;
     padding-bottom: 1.5rem;
-    font-size: 0.4rem;
 }
 
 .mine p {
@@ -124,7 +119,7 @@ footer .mine dl dd {
 }
 
 .mine #nav, .mine menu {
-    padding: 0.5rem 0 0.3rem;
+    padding: 0.5rem 0;
     margin-bottom: 0.4rem;
     background: white;
 }

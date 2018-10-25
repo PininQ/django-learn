@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container login">
         <form method="post" action="">
             {% csrf_token %}
             <div class="form-group">
-                <label for="exampleInputEmail1">用户</label>
+                <label for="exampleInputEmail1">用户名</label>
                 <input type="text" name="username" class="form-control" placeholder="用户名">
             </div>
 
@@ -19,11 +19,13 @@
                 <label for="exampleInputPassword1">密码</label>
                 <input id="password" type="password" name="password" class="form-control" placeholder="密码">
             </div>
-
+            {% if msg %}
+                <span class="msg">{{ msg }}</span>
+            {% endif %}
             <input type="submit" class="btn btn-success btn-block" value="登录">
-
         </form>
-        <a href="{% url 'axf:home' %}"><button class="btn btn-success btn-block" >返回</button></a>
+        <a href="{% url 'user:register' %}" class="btn btn-success btn-block back">注册</a>
+        <a href="{% url 'axf:home' %}" class="btn btn-success btn-block back">返回</a>
     </div>
 
 {% endblock %}

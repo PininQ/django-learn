@@ -123,6 +123,7 @@ def cart(request):
         user_carts = CartModel.objects.filter(user=user)
 
         data = {
-            'user_carts': user_carts
+            "title": "购物车",
+            # 'user_carts': user_carts
         }
-        return render(request, 'axf/cart.html', {"title": "购物车"})
+        return render(request, 'axf/cart.html', data)

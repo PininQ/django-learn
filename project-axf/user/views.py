@@ -10,9 +10,13 @@ from datetime import datetime, timedelta
 def register(request):
     """
     注册
+    待实现 => 注册成功可以直接保存该用户 session ，然后重定向到 我的 页面
     """
+    data = {
+        'title': '注册'
+    }
     if request.method == 'GET':
-        return render(request, 'user/user_register.html')
+        return render(request, 'user/user_register.html', data)
 
     if request.method == 'POST':
         username = request.POST.get('username')  # 用户名
@@ -22,18 +26,18 @@ def register(request):
         # all()验证参数都不为空
         if not all([username, email, password, icon]):
             # 验证不通过, 提示参数不能为空，向页面返回错误信息
-            msg = '请将注册信息填写完整'
+            data['msg'] = '请将注册信息填写完整'
             # 返回注册页面
-            return render(request, 'user/user_register.html', {"msg": msg})
+            return render(request, 'user/user_register.html', data)
         # 加密 password
         password = make_password(password)
-        # 所有参数都有创建用户
+        # 所有参数都不为空则创建用户
         UserModel.objects.create(username=username,
                                  password=password,
                                  email=email,
                                  icon=icon
                                  )
-        # 返回登录页面
+        # 注册成功，重定向到登录页面
         return HttpResponseRedirect(reverse('user:login'))
 
 
@@ -45,14 +49,13 @@ def check_user(request):
     users = UserModel.objects.filter(username=username)
     data = {
         "msg": "ok",
-        "status": "200"
+        "status": "200",
+        'desc': '用户名可用'
     }
     if users.exists():
-        data['desc'] = "用户已存在"
         data['msg'] = "fail"
         data['status'] = '900'
-    else:
-        data['desc'] = '用户名可用'
+        data['desc'] = "用户已存在"
     return JsonResponse(data)
 
 
@@ -60,9 +63,12 @@ def login(request):
     """
     登录
     """
+    data = {
+        'title': '登录'
+    }
     if request.method == 'GET':
         # GET请求返回页面
-        return render(request, 'user/user_login.html')
+        return render(request, 'user/user_login.html', data)
 
     if request.method == 'POST':
         # POST请求获取用户名和密码
@@ -86,20 +92,19 @@ def login(request):
                 UserTicketModel.objects.create(user=user,
                                                out_time=out_time,
                                                ticket=ticket)
-                print("user = ", user.username)
                 # 返回HttpResponse对象
                 return response
             else:
-                msg = '密码错误'
-                return render(request, 'user/user_login.html', {'msg': msg})
+                data['msg'] = '密码错误'
+                return render(request, 'user/user_login.html', data)
         else:
-            msg = '用户不存在'
-            return render(request, 'user/user_login.html', {'msg': msg})
+            data['msg'] = '用户不存在'
+            return render(request, 'user/user_login.html', data)
 
 
 def logout(request):
     """
-    注销
+    注销 删除当前登录的用户的 cookie 中 ticket 的信息
     """
     if request.method == 'GET':
         # 注销，删除当前登录的用户的cookie中的ticket信息
