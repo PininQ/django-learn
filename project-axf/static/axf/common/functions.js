@@ -1,27 +1,22 @@
 function addCart(goods_id) {
-//    $.get('/axf/addCart/?goods_id=' + goods_id, function(msg){
-//        if(msg.code == 200){
-//            $('#num_'+ goods_id).text(msg.c_num)
-//        }else{
-//            alert(msg.msg)
-//        }
-//    });
-    var csrf = $('input[name="csrfmiddlewaretoken"]').val()
+    var csrf = $('input[name="csrfmiddlewaretoken"]').val();
     $.ajax({
         url: '/axf/addCart/',
         type: 'POST',
         data: {'goods_id': goods_id},
         dataType: 'json',
         headers: {'X-CSRFToken': csrf},
-        success: function (msg) {
-            if (msg.code == 200) {
-                count_price()
-                $('#num_' + goods_id).text(msg.c_num)
+        success: function (data) {
+            if (data.code === 200) {
+                count_price();
+                $('#num_' + goods_id).text(data.c_num)
+            } else if (data.code === 900) {
+                // 不用处理
             } else {
-                alert(msg.msg)
+                alert(data.msg)
             }
         },
-        error: function (msg) {
+        error: function () {
             alert('请求失败')
         }
     });
@@ -29,36 +24,31 @@ function addCart(goods_id) {
 
 
 function subCart(goods_id) {
-
-    var csrf = $('input[name="csrfmiddlewaretoken"]').val()
-
+    var csrf = $('input[name="csrfmiddlewaretoken"]').val();
     $.ajax({
         url: '/axf/subCart/',
         type: 'POST',
         data: {'goods_id': goods_id},
-        headers: {'X-CSRFToken': csrf},
         dataType: 'json',
+        headers: {'X-CSRFToken': csrf},
         success: function (data) {
-            if (data.code == '200') {
-                count_price()
+            if (data.code === 200) {
+                count_price();
                 $('#num_' + goods_id).html(data.c_num)
+            } else if (data.code === 900) {
+                // 不用处理
             } else {
                 alert(data.msg)
             }
         },
-        error: function (data) {
+        error: function () {
             alert('请求失败')
         }
     });
 }
 
 function changeSelectStatus(cart_id) {
-
-//    $.post('/axf/changeSelectStatus/', function(data){
-//        alert(data)
-//        alert(data.is_select)
-//    });
-    var csrf = $('input[name="csrfmiddlewaretoken"]').val()
+    var csrf = $('input[name="csrfmiddlewaretoken"]').val();
 
     $.ajax({
         url: '/axf/changeSelectStatus/',
@@ -67,15 +57,17 @@ function changeSelectStatus(cart_id) {
         dataType: 'json',
         headers: {'X-CSRFToken': csrf},
         success: function (data) {
-            if (data.code == '200') {
+            if (data.code === 200) {
                 if (data.is_select) {
-                    $('#cart_id_' + cart_id).html('√')
+                    $('#cart_id_' + cart_id).html('√');
+                    count_price();
                 } else {
-                    $('#cart_id_' + cart_id).html('x')
+                    $('#cart_id_' + cart_id).html('x');
+                    count_price();
                 }
             }
         },
-        error: function (data) {
+        error: function () {
             alert('请求失败')
         }
     });
@@ -83,8 +75,7 @@ function changeSelectStatus(cart_id) {
 
 
 function change_order(order_id) {
-
-    var csrf = $('input[name="csrfmiddlewaretoken"]').val()
+    var csrf = $('input[name="csrfmiddlewaretoken"]').val();
 
     $.ajax({
         url: '/axf/changeOrderStatus/',
@@ -93,20 +84,19 @@ function change_order(order_id) {
         dataType: 'json',
         headers: {'X-CSRFToken': csrf},
         success: function (msg) {
-            if (msg.code == '200') {
+            if (msg.code === 200) {
                 location.href = '/axf/mine/'
             }
         },
-        error: function (msg) {
+        error: function () {
             alert('订单状态修改失败')
         }
-
     })
 }
 
 
 function all_select(i) {
-    csrf = $('input[name="csrfmiddlewaretoken"]').val()
+    var csrf = $('input[name="csrfmiddlewaretoken"]').val();
     $.ajax({
         url: '/axf/changeCartAllSelect/',
         type: 'POST',
@@ -114,27 +104,27 @@ function all_select(i) {
         dataType: 'json',
         headers: {'X-CSRFToken': csrf},
         success: function (msg) {
-            if (msg.code == '200') {
-                count_price()
+            if (msg.code === 200) {
+                count_price();
                 for (var i = 0; i < msg.ids.length; i++) {
                     if (msg.flag) {
-                        s = '<span onclick="cartchangeselect(' + msg.ids[i] + ')">x</span>'
-                        $('#changeselect_' + msg.ids[i]).html(s)
+                        var s1 = '<span onclick="cartchangeselect(' + msg.ids[i] + ')">x</span>';
+                        $('#changeselect_' + msg.ids[i]).html(s1);
 
-                        $('#all_select_id').attr({'onclick': 'all_select(1)'})
+                        $('#all_select_id').attr({'onclick': 'all_select(1)'});
                         $('#select_id').html('√')
                     } else {
-                        s = '<span onclick="cartchangeselect(' + msg.ids[i] + ')">√</span>'
-                        $('#changeselect_' + msg.ids[i]).html(s)
+                        var s2 = '<span onclick="cartchangeselect(' + msg.ids[i] + ')">√</span>';
+                        $('#changeselect_' + msg.ids[i]).html(s2);
 
-                        $('#all_select_id').attr({'onclick': 'all_select(0)'})
+                        $('#all_select_id').attr({'onclick': 'all_select(0)'});
                         $('#select_id').html('x')
                     }
                 }
             }
         },
-        error: function (msg) {
-            alert('请求失败')
+        error: function () {
+            alert('请求失败');
         }
     });
 }
@@ -142,15 +132,15 @@ function all_select(i) {
 function count_price() {
 
     $.get('/axf/countPrice/', function (msg) {
-        if (msg.code == '200') {
-            $('#count_price').html('总价:' + msg.count_price)
+        if (msg.code === 200) {
+            $('#count_price').html('总价:' + msg.count_price);
         }
     })
 }
 
 $.get('/axf/countPrice/', function (msg) {
-    if (msg.code == '200') {
-        $('#count_price').html('总价:' + msg.count_price)
+    if (msg.code === 200) {
+        $('#count_price').html('总价:' + msg.count_price);
     }
-})
+});
 

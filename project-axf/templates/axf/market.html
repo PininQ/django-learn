@@ -77,19 +77,11 @@
                         </div>
                     </a>
                     <section>
-                        <button onclick="subCart({{ gds.id }})">-</button>
+                        <button goodsid="" onclick="subCart({{ gds.id }})">-</button>
                         {% if user_cart %}
-                            {% for cart_goods in user_cart %}
-                                {% ifequal cart_goods.goods.id gds.id %}
-                                    <span id="num_{{ gds.id }}">{{ cart_goods.c_num }}</span>
-                                {% else %}
-                                    <span id="num_{{ gds.id }}">0</span>
-                                {% endifequal %}
-                            {% endfor %}
-                        {% else %}
-                            <span id="num_{{ gds.id }}">0</span>
+                            <span id="num_{{ gds.id }}">{{ gds.num|default:0 }}</span>
                         {% endif %}
-                        <button onclick="addCart({{ gds.id }})">+</button>
+                        <button goodsid="" onclick="addCart({{ gds.id }})">+</button>
                     </section>
                 </li>
                 {% endfor %}

@@ -1,16 +1,119 @@
-{% extends 'axf/../base.html' %}
+{% extends 'base_main.html' %}
 
-{% load static from staticfiles %}
-{% block linkscript %}
-    <link rel="stylesheet" type="text/css" href="{% static 'cart/css/cart.css'%}" />
-    <script type="text/javascript" charset="utf-8" src="{% static 'cart/js/cart.js' %}"></script>
+{% load static %}
+{#{% load static from staticfiles %}#}
+
+{% block extCSS %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'axf/cart/cart.css' %}"/>
 {% endblock %}
 
+{% block EXTJS %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'axf/cart/js/cart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'axf/common/functions.js' %}"></script>
+{% endblock %}
 
-{% block base %}
-<h1>qinbin is a good man</h1>
-<h1>qinbin is a nice man</h1>
-<h1>qinbin is a cool man</h1>
-<h1>qinbin is a handsome man</h1>
-<h1>cart</h1>
+{% block content %}
+
+    <div id="cart">
+
+        <h3>购物车</h3>
+
+        <section class="full">
+            <section class="clear">
+
+                <ul>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">收货人<b></b></p> : <span>大蟀蟀</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">电话<b></b></p> : <span>020-00008888</span>
+                            <a href="#" class="change">修改&gt;</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="clear">
+                            <p class="infoJustify">收货地址<b></b></p> : <span>XX 室 XX 号 XX 弄 XX 路</span>
+                        </div>
+                    </li>
+                </ul>
+
+                <section class="bill">
+                    <p>闪送超市</p>
+                    <a href="#">凑单专区</a>
+                    <p>满100减99</p>
+                </section>
+
+                <section class="delivery">
+                    <span>收货时间:</span>
+                    <span>一小时送达</span>
+                    <a href="#">可预定&gt;</a>
+                </section>
+
+                <section class="delivery">
+                    <span>收货备注:</span>
+                    <input type="text" placeholder="可输入100字以内特殊需求内容">
+                </section>
+
+                <menu>
+                    <ul>
+                        <!--购物车信息展示-->
+                        {% csrf_token %}
+                        {% for cart in user_carts %}
+                            <li class="menuList" cartid="{{ cart.id }}">
+                                <div class="confirm">
+                                    <span class="is_choose" id="changeselect_{{ cart.id }}">
+                                        {% if cart.is_select %}
+                                            <span id="cart_id_{{ cart.id }}"
+                                                  onclick="changeSelectStatus({{ cart.id }});"
+                                            >
+                                                √
+                                            </span>
+                                        {% else %}
+                                            <span id="cart_id_{{ cart.id }}"
+                                                  onclick="changeSelectStatus({{ cart.id }});"
+                                            >
+                                                x
+                                            </span>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <a href="javascript:;">
+                                    <img src="{{ cart.goods.productimg }}" alt="{{cart.goods.productname}}">
+                                    <p>{{ cart.goods.productlongname }}</p>
+                                    <span>¥{{ cart.goods.price }}</span>
+                                    <s>¥{{ cart.goods.marketprice }}</s>
+                                </a>
+                                <section>
+                                    <button onclick="subCart({{ cart.goods.id }})">-</button>
+                                    <span id="num_{{ cart.goods.id }}">{{ cart.c_num }}</span>
+                                    <button onclick="addCart({{ cart.goods.id }})">+</button>
+                                </section>
+                            </li>
+                        {% endfor %}
+                        <!--购物车数据处理结束-->
+                        <li class="payTheBill">
+
+                            <div class="confirm" onclick="all_select(1)" id="all_select_id">
+                                <span>
+                                    <span id="select_id">√</span>
+                                </span>
+                            </div>
+
+                            <p>
+                                <span>全选</span>
+                                <span id="count_price">总价:</span>
+                            </p>
+                            <span><a href="{% url 'axf:generate_order' %}">下单</a></span>
+                        </li>
+                    </ul>
+                </menu>
+
+            </section>
+        </section>
+    </div>
 {% endblock %}
