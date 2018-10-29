@@ -78,8 +78,10 @@
                     </a>
                     <section>
                         <button goodsid="" onclick="subCart({{ gds.id }})">-</button>
-                        {% if user_cart %}
+                        {% if user_cart == '' %}
                             <span id="num_{{ gds.id }}">{{ gds.num|default:0 }}</span>
+                        {% else %}
+                            <span id="num_{{ gds.id }}">0</span>
                         {% endif %}
                         <button goodsid="" onclick="addCart({{ gds.id }})">+</button>
                     </section>
